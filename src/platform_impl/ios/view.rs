@@ -22,6 +22,7 @@ use crate::platform_impl::KeyEventExtra;
 use crate::window::{WindowAttributes, WindowId as RootWindowId};
 
 pub struct WinitViewState {
+    ime_allowed: Cell<bool>,
     pinch_gesture_recognizer: RefCell<Option<Retained<UIPinchGestureRecognizer>>>,
     doubletap_gesture_recognizer: RefCell<Option<Retained<UITapGestureRecognizer>>>,
     rotation_gesture_recognizer: RefCell<Option<Retained<UIRotationGestureRecognizer>>>,
@@ -319,7 +320,7 @@ declare_class!(
 
         #[method(canBecomeFirstResponder)]
         fn can_become_first_responder(&self) -> bool {
-            true
+            self.ivars().ime_allowed.get()
         }
     }
 
@@ -360,6 +361,7 @@ impl WinitView {
         frame: CGRect,
     ) -> Retained<Self> {
         let this = mtm.alloc().set_ivars(WinitViewState {
+            ime_allowed: Cell::new(false),
             pinch_gesture_recognizer: RefCell::new(None),
             doubletap_gesture_recognizer: RefCell::new(None),
             rotation_gesture_recognizer: RefCell::new(None),
@@ -378,6 +380,13 @@ impl WinitView {
         }
 
         this
+    }
+
+    pub fn set_ime_allowed(&self, allowed: bool) {
+        self.ivars().ime_allowed.set(allowed);
+        unsafe {
+            if allowed { self.becomeFirstResponder(); } else { self.resignFirstResponder(); }
+        }
     }
 
     fn window(&self) -> Option<Retained<WinitUIWindow>> {

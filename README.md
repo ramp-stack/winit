@@ -1,4 +1,20 @@
-# winit - Cross-platform window creation and management in Rust
+# ramp-winit — RAMP's winit fork
+
+This fork is based on upstream winit 0.30.13 and preserves Maverick's iOS fixes:
+control-flow observers run in common run-loop modes, and the window becomes a
+text responder only while IME input is enabled. The public library remains `winit`.
+
+```toml
+[dependencies]
+winit = { package = "ramp-winit", version = "0.30.14" }
+```
+
+The maintained release branch is `v0.30.x`. Fork changes are reviewed by
+@CalebCouch. The upstream Apache-2.0 license and contributor attribution are
+preserved below and in `LICENSE`.
+
+## Upstream winit
+
 
 [![Crates.io](https://img.shields.io/crates/v/winit.svg)](https://crates.io/crates/winit)
 [![Docs.rs](https://docs.rs/winit/badge.svg)](https://docs.rs/winit)
@@ -8,7 +24,7 @@
 
 ```toml
 [dependencies]
-winit = "0.30.13"
+winit = { package = "ramp-winit", version = "0.30.14" }
 ```
 
 ## [Documentation](https://docs.rs/winit)
