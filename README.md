@@ -6,7 +6,7 @@ text responder only while IME input is enabled. The public library remains `wini
 
 ```toml
 [dependencies]
-winit = { package = "ramp-winit", version = "0.30.14" }
+winit = { package = "ramp-winit", version = "0.30.15" }
 ```
 
 The maintained release branch is `v0.30.x`. Fork changes are reviewed by
@@ -24,7 +24,7 @@ preserved below and in `LICENSE`.
 
 ```toml
 [dependencies]
-winit = { package = "ramp-winit", version = "0.30.14" }
+winit = { package = "ramp-winit", version = "0.30.15" }
 ```
 
 ## [Documentation](https://docs.rs/winit)
